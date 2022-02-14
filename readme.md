@@ -15,16 +15,11 @@ This projected features a React Native app where you can specify a specific part
 
 This projected features a React Native app where you can specify a specific part of a website to track. After registering your selection, the backend continuously checks the website for changes and updates the client app when such a change occurs. A handy administration panel allows one to oversee users and their tracked items.
 
-<style>
-img {
-    box-shadow: 0 0 8px 2px #0002;
-}
-</style>
 <div style="overflow: auto;">
 	<div style="display: flex; min-width: min-content; padding: 24px; gap: 24px; overflow: auto;">
-		<img height="200" src="img/list-filters.png" />
-		<img height="200" src="img/filter-info.png" />
-		<img height="200" src="img/add-filter.png" />
-		<img height="200" src="img/admin-interface.png" />
+		<img height="200" src="img/list-filters.png" style="box-shadow: 0 0 8px 2px #0002;" />
+		<img height="200" src="img/filter-info.png" style="box-shadow: 0 0 8px 2px #0002;" />
+		<img height="200" src="img/add-filter.png" style="box-shadow: 0 0 8px 2px #0002;" />
+		<img height="200" src="img/admin-interface.png" style="box-shadow: 0 0 8px 2px #0002;" />
 	</div>
 </div>
