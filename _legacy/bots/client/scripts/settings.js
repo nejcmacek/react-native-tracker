@@ -1,3 +1,0 @@
-export const serverIP = '164.8.160.116:3000';
-export const serverAddress = 'http://' + serverIP;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2V0dGluZ3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzZXR0aW5ncy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsTUFBTSxRQUFRLEdBQUcsb0JBQW9CLENBQUE7QUFDNUMsTUFBTSxDQUFDLE1BQU0sYUFBYSxHQUFHLFNBQVMsR0FBRyxRQUFRLENBQUEifQ==
