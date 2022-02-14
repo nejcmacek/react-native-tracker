@@ -1,0 +1,3 @@
+export const accent = '#06cec7';
+export const secondary = '#d097ed';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdHMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkZWZhdWx0cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsTUFBTSxNQUFNLEdBQUcsU0FBUyxDQUFBO0FBQy9CLE1BQU0sQ0FBQyxNQUFNLFNBQVMsR0FBRyxTQUFTLENBQUEifQ==

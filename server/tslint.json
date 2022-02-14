@@ -1,0 +1,10 @@
+{
+	"rules": {
+		"semicolon": [
+			"never"
+		],
+		"quotemark": [
+			"double", "avoid-escape"
+		]
+	}
+}

@@ -1,0 +1,43 @@
+<div class="modal-wrapper">
+  <div class="modal-inner">
+    <div class="modal">
+      <div class="minner">
+        <table class="plain mapping">
+          <tr>
+            <td>Title:</td>
+            <td><input type="text" [(ngModel)]="clone.title"></td>
+          </tr>
+          <tr>
+            <td>Method:</td>
+            <td><input type="text" [(ngModel)]="clone.method"></td>
+          </tr>
+          <tr>
+            <td>URI:</td>
+            <td><input type="text" [(ngModel)]="clone.uri"></td>
+          </tr>
+          <tr>
+            <td>Track:</td>
+            <td><input type="checkbox" id="filter-edit-track" [(ngModel)]="clone.track"><label for="filter-edit-track">Track</label></td>
+          </tr>
+          <tr>
+            <td>Path:</td>
+            <td><input type="text" [(ngModel)]="clone.path"></td>
+          </tr>
+          <tr>
+            <td>Body:</td>
+            <td><input type="text" [(ngModel)]="bodystring"></td>
+          </tr>
+          <tr>
+            <td>ID:</td>
+            <td>{{filter._id}}</td>
+          </tr>
+        </table>
+        <div class="buttons-holder">
+          <button (click)="close()">Cancel</button>
+          <button (click)="delete()">Delete</button>
+          <button (click)="save()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

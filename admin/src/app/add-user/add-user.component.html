@@ -1,0 +1,30 @@
+<div class="modal-wrapper">
+  <div class="modal-inner">
+    <div class="modal">
+      <div class="minner">
+        <table class="plain mapping">
+          <tr>
+            <td>Username:</td>
+            <td><input type="text" [(ngModel)]="name"></td>
+          </tr>
+          <tr>
+            <td>Display Name:</td>
+            <td><input type="text" [(ngModel)]="displayName"></td>
+          </tr>
+          <tr>
+            <td>Password:</td>
+            <td><input type="text" [(ngModel)]="password"></td>
+          </tr>
+          <tr>
+            <td>Admin:</td>
+            <td><input type="checkbox" id="user-add-track" [(ngModel)]="admin"><label for="user-add-track">Admin</label></td>
+          </tr>
+        </table>
+        <div class="buttons-holder">
+          <button (click)="close()">Cancel</button>
+          <button (click)="add()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

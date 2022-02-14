@@ -1,0 +1,9 @@
+{
+  "name": "Admin Interface",
+  "short_name": "Admin Interface",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#fff",
+  "theme_color": "#F44336"
+}

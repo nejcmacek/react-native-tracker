@@ -1,0 +1,19 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class EventHandler {
+    constructor() {
+        this.table = {};
+    }
+    on(type, cb) {
+        if (!(type in this.table))
+            this.table[type] = [];
+        this.table[type].push(cb);
+    }
+    emit(type, e) {
+        if (!(type in this.table))
+            return;
+        this.table[type].forEach(t => t.call(null, e));
+    }
+}
+exports.default = EventHandler;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXZlbnQtaGFuZGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV2ZW50LWhhbmRsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFjQTtJQUFBO1FBRVMsVUFBSyxHQUFVLEVBQUUsQ0FBQTtJQWtCMUIsQ0FBQztJQWRBLEVBQUUsQ0FBQyxJQUFJLEVBQUUsRUFBRTtRQUNWLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLElBQUksSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQ3pCLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxDQUFBO1FBQ3RCLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFBO0lBQzFCLENBQUM7SUFJRCxJQUFJLENBQUMsSUFBWSxFQUFFLENBQU07UUFDeEIsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDekIsTUFBTSxDQUFBO1FBQ1AsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDaEQsQ0FBQztDQUVEO0FBcEJELCtCQW9CQyJ9

@@ -1,0 +1,27 @@
+<div class="modal-wrapper">
+  <div class="modal-inner">
+    <div class="modal">
+      <div class="minner">
+        <div *ngIf="!loading">
+          <table class="plain mapping">
+            <tr>
+              <td>Enabled:</td>
+              <td><input type="checkbox" id="settings-changed-enabled" [(ngModel)]="enabled"><label for="settings-changed-enabled">Enabled</label></td>
+            </tr>
+            <tr>
+              <td>Interval:</td>
+              <td><input type="number" [(ngModel)]="interval"></td>
+            </tr>
+          </table>
+          <div class="buttons-holder">
+            <button (click)="close()">Cancel</button>
+            <button (click)="save()">Save</button>
+          </div>
+        </div>
+        <div *ngIf="loading">
+          <p>Loading...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

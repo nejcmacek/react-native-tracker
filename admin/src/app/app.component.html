@@ -1,0 +1,21 @@
+<div>
+  <div class="header">
+    <span class="title">Admin Interface</span>
+    <span class="right">
+      <button (click)="this.changeSettings=true">Change Settings</button>
+    </span>
+  </div>
+
+  <div *ngIf="loading">Loading...</div>
+
+  <div class="body" *ngIf="!loading">
+    <app-userfilter-display [users]="users" [filters]="filters" [events]="events"></app-userfilter-display>
+  </div>
+
+  <app-edit-filter *ngIf="!!editFilter" [filter]="editFilter" [events]="events"></app-edit-filter>
+  <app-edit-user *ngIf="!!editUser" [user]="editUser" [events]="events"></app-edit-user>
+  <app-add-user *ngIf="!!addUser" [events]="events"></app-add-user>
+  <app-add-filter *ngIf="!!addFilter" [user]="addFilter" [events]="events"></app-add-filter>
+  <app-change-settings *ngIf="!!changeSettings" [events]="events"></app-change-settings>
+
+</div>

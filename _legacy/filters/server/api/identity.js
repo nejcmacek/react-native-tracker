@@ -1,0 +1,77 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const uuid = require("uuid/v4");
+class IdentitytProvider {
+    constructor() {
+        this.table = {};
+    }
+    static getIdentityToken(req) {
+        return req.header('Identity-Token') || null;
+    }
+    generateToken() {
+        let token = uuid();
+        while (this.table[token])
+            token = uuid();
+        return token;
+    }
+    getAll() {
+        return Object.keys(this.table);
+    }
+    get(token) {
+        return this.table[token] || null;
+    }
+    getByUsername(name) {
+        for (const token in this.table) {
+            const idt = this.table[token];
+            if (idt.user.name === name)
+                return idt;
+        }
+        return null;
+    }
+    getById(id) {
+        for (const token in this.table) {
+            const idt = this.table[token];
+            if (idt.id === id)
+                return idt;
+        }
+        return null;
+    }
+    has(token) {
+        return token in this.table;
+    }
+    remove(token) {
+        if (!token)
+            return false;
+        return delete this.table[token];
+    }
+    set(user, id) {
+        let idt = this.getById(user.name);
+        if (idt)
+            return idt;
+        const token = this.generateToken();
+        idt = { token, id, user };
+        this.table[token] = idt;
+        return idt;
+    }
+    isAdmin(id) {
+        return id.user.admin;
+    }
+    process(req) {
+        const token = IdentitytProvider.getIdentityToken(req);
+        return this.get(token);
+    }
+    require(req) {
+        const id = this.process(req);
+        if (!id)
+            throw new Error("Authentication required.");
+        return id;
+    }
+    requireAdmin(req) {
+        const id = this.require(req);
+        if (!id.user.admin)
+            throw new Error("Not privileged.");
+        return id;
+    }
+}
+exports.default = IdentitytProvider;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaWRlbnRpdHkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpZGVudGl0eS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUVBLGdDQUFnQztBQVloQztJQUFBO1FBTVMsVUFBSyxHQUFrQixFQUFFLENBQUE7SUEwRWxDLENBQUM7SUE5RU8sTUFBTSxDQUFDLGdCQUFnQixDQUFDLEdBQVk7UUFDMUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQUMsZ0JBQWdCLENBQUMsSUFBSSxJQUFJLENBQUE7SUFDNUMsQ0FBQztJQUlPLGFBQWE7UUFDcEIsSUFBSSxLQUFLLEdBQUcsSUFBSSxFQUFFLENBQUE7UUFDbEIsT0FBTyxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQztZQUN2QixLQUFLLEdBQUcsSUFBSSxFQUFFLENBQUE7UUFDZixNQUFNLENBQUMsS0FBSyxDQUFBO0lBQ2IsQ0FBQztJQUVELE1BQU07UUFDTCxNQUFNLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUE7SUFDL0IsQ0FBQztJQUVELEdBQUcsQ0FBQyxLQUFhO1FBQ2hCLE1BQU0sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxJQUFJLElBQUksQ0FBQTtJQUNqQyxDQUFDO0lBRUQsYUFBYSxDQUFDLElBQVk7UUFDekIsR0FBRyxDQUFDLENBQUMsTUFBTSxLQUFLLElBQUksSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7WUFDaEMsTUFBTSxHQUFHLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQTtZQUM3QixFQUFFLENBQUMsQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLElBQUksS0FBSyxJQUFJLENBQUM7Z0JBQzFCLE1BQU0sQ0FBQyxHQUFHLENBQUE7UUFDWixDQUFDO1FBQ0QsTUFBTSxDQUFDLElBQUksQ0FBQTtJQUNaLENBQUM7SUFFRCxPQUFPLENBQUMsRUFBVTtRQUNqQixHQUFHLENBQUMsQ0FBQyxNQUFNLEtBQUssSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztZQUNoQyxNQUFNLEdBQUcsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFBO1lBQzdCLEVBQUUsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxFQUFFLEtBQUssRUFBRSxDQUFDO2dCQUNqQixNQUFNLENBQUMsR0FBRyxDQUFBO1FBQ1osQ0FBQztRQUNELE1BQU0sQ0FBQyxJQUFJLENBQUE7SUFDWixDQUFDO0lBRUQsR0FBRyxDQUFDLEtBQWE7UUFDaEIsTUFBTSxDQUFDLEtBQUssSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFBO0lBQzNCLENBQUM7SUFFRCxNQUFNLENBQUMsS0FBYTtRQUNuQixFQUFFLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQztZQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUE7UUFDeEIsTUFBTSxDQUFDLE9BQU8sSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQTtJQUNoQyxDQUFDO0lBRUQsR0FBRyxDQUFDLElBQVUsRUFBRSxFQUFVO1FBQ3pCLElBQUksR0FBRyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFBO1FBQ2pDLEVBQUUsQ0FBQyxDQUFDLEdBQUcsQ0FBQztZQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUE7UUFDbkIsTUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLGFBQWEsRUFBRSxDQUFBO1FBQ2xDLEdBQUcsR0FBRyxFQUFFLEtBQUssRUFBRSxFQUFFLEVBQUUsSUFBSSxFQUFFLENBQUE7UUFDekIsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsR0FBRyxHQUFHLENBQUE7UUFDdkIsTUFBTSxDQUFDLEdBQUcsQ0FBQTtJQUNYLENBQUM7SUFFRCxPQUFPLENBQUMsRUFBWTtRQUNuQixNQUFNLENBQUMsRUFBRSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUE7SUFDckIsQ0FBQztJQUVELE9BQU8sQ0FBQyxHQUFZO1FBQ25CLE1BQU0sS0FBSyxHQUFHLGlCQUFpQixDQUFDLGdCQUFnQixDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ3RELE1BQU0sQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxDQUFBO0lBQ3ZCLENBQUM7SUFFRCxPQUFPLENBQUMsR0FBWTtRQUNuQixNQUFNLEVBQUUsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxDQUFBO1FBQzVCLEVBQUUsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1lBQUMsTUFBTSxJQUFJLEtBQUssQ0FBQywwQkFBMEIsQ0FBQyxDQUFBO1FBQ3BELE1BQU0sQ0FBQyxFQUFFLENBQUE7SUFDVixDQUFDO0lBRUQsWUFBWSxDQUFDLEdBQVk7UUFDeEIsTUFBTSxFQUFFLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQTtRQUM1QixFQUFFLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDO1lBQUMsTUFBTSxJQUFJLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxDQUFBO1FBQ3RELE1BQU0sQ0FBQyxFQUFFLENBQUE7SUFDVixDQUFDO0NBRUQ7QUFoRkQsb0NBZ0ZDIn0=

@@ -1,0 +1,55 @@
+import * as React from 'react';
+import { Component } from 'react';
+import { View, Text, ListView, TouchableHighlight } from 'react-native';
+import Conversationitem from "../../components/ConversationItem/ConversationItem";
+export default class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            cs: null,
+            csd: null,
+            error: null
+        };
+        this.loadData();
+    }
+    async loadData() {
+        try {
+            const cs = await this.props.navigation.state.params.identity.get('/api/conversations/');
+            const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+            this.setState({
+                cs,
+                csd: ds.cloneWithRows(cs)
+            });
+        }
+        catch (ex) {
+            this.setState({ error: ex });
+        }
+    }
+    async load() {
+        this.setState({ cs: null, csd: null, error: null });
+        this.loadData();
+    }
+    onClick(index) {
+        const con = this.state.cs[index];
+        const { identity } = this.props.navigation.state.params;
+        this.props.navigation.navigate('Chat', { identity, con });
+    }
+    setNativeProps(nativeProps) {
+        this._root.setNativeProps(nativeProps);
+    }
+    render() {
+        const cs = this.state.cs;
+        if (cs) {
+            return (React.createElement(ListView, { dataSource: this.state.csd, renderRow: (rowData, sectionId, rowId) => (React.createElement(TouchableHighlight, { ref: component => this._root = component, onPress: () => this.onClick(rowId) },
+                    React.createElement(Conversationitem, { chat: rowData }))) }));
+        }
+        else {
+            return (React.createElement(View, { style: { padding: 16, justifyContent: 'center' } },
+                React.createElement(Text, null, "Loading...")));
+        }
+    }
+}
+Home.navigationOptions = ({ navigation }) => ({
+    title: 'Home'
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSG9tZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkhvbWUudHN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sS0FBSyxLQUFLLE1BQU0sT0FBTyxDQUFBO0FBQzlCLE9BQU8sRUFBRSxTQUFTLEVBQUUsTUFBTSxPQUFPLENBQUE7QUFDakMsT0FBTyxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsUUFBUSxFQUFzQixrQkFBa0IsRUFBRSxNQUFNLGNBQWMsQ0FBQTtBQUUzRixPQUFPLGdCQUFnQixNQUFNLG9EQUFvRCxDQUFDO0FBWWxGLE1BQU0sQ0FBQyxPQUFPLFdBQVksU0FBUSxTQUEyQjtJQVE1RCxZQUFZLEtBQUs7UUFDaEIsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFBO1FBQ1osSUFBSSxDQUFDLEtBQUssR0FBRztZQUNaLEVBQUUsRUFBRSxJQUFJO1lBQ1IsR0FBRyxFQUFFLElBQUk7WUFDVCxLQUFLLEVBQUUsSUFBSTtTQUNYLENBQUE7UUFDRCxJQUFJLENBQUMsUUFBUSxFQUFFLENBQUE7SUFDaEIsQ0FBQztJQUVPLEtBQUssQ0FBQyxRQUFRO1FBQ3JCLElBQUksQ0FBQztZQUNKLE1BQU0sRUFBRSxHQUFHLE1BQU0sSUFBSSxDQUFDLEtBQUssQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLHFCQUFxQixDQUFDLENBQUE7WUFDdkYsTUFBTSxFQUFFLEdBQUcsSUFBSSxRQUFRLENBQUMsVUFBVSxDQUFDLEVBQUUsYUFBYSxFQUFFLENBQUMsRUFBRSxFQUFFLEVBQUUsS0FBSyxFQUFFLEtBQUssRUFBRSxFQUFFLENBQUMsQ0FBQztZQUM3RSxJQUFJLENBQUMsUUFBUSxDQUFDO2dCQUNiLEVBQUU7Z0JBQ0YsR0FBRyxFQUFFLEVBQUUsQ0FBQyxhQUFhLENBQUMsRUFBRSxDQUFDO2FBQ3pCLENBQUMsQ0FBQTtRQUNILENBQUM7UUFBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDO1lBQ2IsSUFBSSxDQUFDLFFBQVEsQ0FBQyxFQUFFLEtBQUssRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFBO1FBQzdCLENBQUM7SUFDRixDQUFDO0lBRUQsS0FBSyxDQUFDLElBQUk7UUFDVCxJQUFJLENBQUMsUUFBUSxDQUFDLEVBQUUsRUFBRSxFQUFFLElBQUksRUFBRSxHQUFHLEVBQUUsSUFBSSxFQUFFLEtBQUssRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFBO1FBQ25ELElBQUksQ0FBQyxRQUFRLEVBQUUsQ0FBQTtJQUNoQixDQUFDO0lBRUQsT0FBTyxDQUFDLEtBQWE7UUFDcEIsTUFBTSxHQUFHLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxFQUFFLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDakMsTUFBTSxFQUFFLFFBQVEsRUFBRSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUE7UUFDdkQsSUFBSSxDQUFDLEtBQUssQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLE1BQU0sRUFBRSxFQUFFLFFBQVEsRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFBO0lBQzFELENBQUM7SUFFRCxjQUFjLENBQUMsV0FBVztRQUN6QixJQUFJLENBQUMsS0FBSyxDQUFDLGNBQWMsQ0FBQyxXQUFXLENBQUMsQ0FBQztJQUN4QyxDQUFDO0lBRUQsTUFBTTtRQUNMLE1BQU0sRUFBRSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsRUFBRSxDQUFBO1FBQ3hCLEVBQUUsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDUixNQUFNLENBQUMsQ0FDTixvQkFBQyxRQUFRLElBQ1IsVUFBVSxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxFQUMxQixTQUFTLEVBQUUsQ0FBQyxPQUFPLEVBQUUsU0FBUyxFQUFFLEtBQUssS0FBSyxDQUN6QyxvQkFBQyxrQkFBa0IsSUFBQyxHQUFHLEVBQUUsU0FBUyxJQUFJLElBQUksQ0FBQyxLQUFLLEdBQUcsU0FBUyxFQUFFLE9BQU8sRUFBRSxNQUFNLElBQUksQ0FBQyxPQUFPLENBQUMsS0FBZSxDQUFDO29CQUN6RyxvQkFBQyxnQkFBZ0IsSUFBQyxJQUFJLEVBQUUsT0FBTyxHQUFxQixDQUNoQyxDQUNyQixHQUNBLENBQ0YsQ0FBQTtRQUNGLENBQUM7UUFBQyxJQUFJLENBQUMsQ0FBQztZQUNQLE1BQU0sQ0FBQyxDQUNOLG9CQUFDLElBQUksSUFBQyxLQUFLLEVBQUUsRUFBRSxPQUFPLEVBQUUsRUFBRSxFQUFFLGNBQWMsRUFBRSxRQUFRLEVBQUU7Z0JBQ3JELG9CQUFDLElBQUkscUJBQWtCLENBQ2pCLENBQ1AsQ0FBQTtRQUNGLENBQUM7SUFDRixDQUFDOztBQWhFTSxzQkFBaUIsR0FBRyxDQUFDLEVBQUUsVUFBVSxFQUFFLEtBQUssQ0FBQztJQUMvQyxLQUFLLEVBQUUsTUFBTTtDQUNiLENBQUMsQ0FBQSJ9

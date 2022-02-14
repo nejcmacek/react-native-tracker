@@ -1,0 +1,33 @@
+<table class="plain mapping">
+  <tr>
+    <td>Title:</td>
+    <td>{{filter.title}}</td>
+  </tr>
+  <tr>
+    <td>Method:</td>
+    <td>{{filter.method}}</td>
+  </tr>
+  <tr>
+    <td>URI:</td>
+    <td><a target="_blank" href="{{filter.uri}}">{{filter.uri}}</a></td>
+  </tr>
+  <tr>
+    <td>Track:</td>
+    <td>{{filter.track}}</td>
+  </tr>
+  <tr>
+    <td>Path:</td>
+    <td>{{filter.path}}</td>
+  </tr>
+  <tr>
+    <td>Body:</td>
+    <td>{{getBody()}}</td>
+  </tr>
+  <tr>
+    <td>ID:</td>
+    <td>{{filter._id}}</td>
+  </tr>
+</table>
+<div class="buttons-holder">
+  <button (click)="onChange()">Change</button>
+</div>

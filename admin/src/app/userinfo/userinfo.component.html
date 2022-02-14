@@ -1,0 +1,21 @@
+<table class="plain mapping">
+  <tr>
+    <td>Username:</td>
+    <td>{{user.name}}</td>
+  </tr>
+  <tr>
+    <td>Display Name:</td>
+    <td>{{user.displayName}}</td>
+  </tr>
+  <tr>
+    <td>Is Admin:</td>
+    <td>{{user.admin}}</td>
+  </tr>
+  <tr>
+    <td>ID:</td>
+    <td>{{user._id}}</td>
+  </tr>
+</table>
+<div class="buttons-holder">
+  <button (click)="onChange()">Change</button>
+</div>

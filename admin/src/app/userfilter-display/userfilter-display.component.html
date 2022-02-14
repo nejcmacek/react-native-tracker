@@ -1,0 +1,20 @@
+<div class="list" style="z-index:2">
+  <app-userlist *ngFor="let user of users" [user]="user" (click)="selectUser(user)"></app-userlist>
+  <div class="buttons-holder">
+    <button (click)="addUser()">Add User</button>
+  </div>
+</div>
+<div class="list" *ngIf="selectedUser" style="z-index:3">
+  <app-filterlist *ngFor="let filter of getUserFilters()" [filter]="filter" (click)="selectedFilter=filter"></app-filterlist>
+  <div class="buttons-holder">
+    <button (click)="addFilter()">Add Filter</button>
+  </div>
+</div>
+<div class="list" *ngIf="selectedFilter||selectedUser" style="z-index:4">
+  <div *ngIf="selectedUser" class="info-block">
+    <app-userinfo [user]="selectedUser" [events]="events">></app-userinfo>
+  </div>
+  <div *ngIf="selectedFilter" class="info-block">
+    <app-filterinfo [filter]="selectedFilter" [events]="events"></app-filterinfo>
+  </div>
+</div>

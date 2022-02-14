@@ -1,0 +1,18 @@
+.item {
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.small {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 12px;
+}
+
+.item:hover {
+  background: #eee
+}
+
+:host {
+  display: flex
+}

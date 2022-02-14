@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "es2017",
+		"jsx": "react",
+		"typeRoots": [
+			"node_modules/@types/"
+		]
+	},
+	"include": [
+		"components",
+		"screens",
+		"scripts",
+		"util"
+	],
+	"typeAcquisition": {
+		"enable": true
+	}
+	// "exclude": [
+	// 	".*",
+	// 	"android",
+	// 	"ios",
+	// 	"__tests__",
+	// 	"node_modules"
+	// ]
+}
